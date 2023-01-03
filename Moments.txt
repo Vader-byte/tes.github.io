@@ -1,0 +1,139 @@
+moment().format('MMMM Do YYYY, h:mm:ss a'); // April 2 2020, 11:54:09 malam
+moment().format('dddd');                    // Kamis
+moment().format("MMM Do YY");               // Apr 2 20
+moment().format('YYYY [escaped] YYYY');     // 2020 escaped 2020
+moment().format();                          // 2020-04-02T23:54:09+07:00          
+Format untuk relative waktu
+
+moment("20111031", "YYYYMMDD").fromNow(); // 8 tahun yang lalu
+moment("20120620", "YYYYMMDD").fromNow(); // 8 tahun yang lalu
+moment().startOf('day').fromNow();        // sehari yang lalu
+moment().endOf('day').fromNow();          // dalam 5 menit
+moment().startOf('hour').fromNow();       // sejam yang lalu
+                                         
+Format waktu calender
+
+moment().subtract(10, 'days').calendar(); // 23/03/2020
+moment().subtract(6, 'days').calendar();  // Jumat lalu pukul 23.55
+moment().subtract(3, 'days').calendar();  // Senin lalu pukul 23.55
+moment().subtract(1, 'days').calendar();  // Kemarin pukul 23.55
+moment().calendar();                      // Hari ini pukul 23.55
+moment().add(1, 'days').calendar();       // Besok pukul 23.55
+moment().add(3, 'days').calendar();       // Minggu pukul 23.55
+moment().add(10, 'days').calendar();      // 12/04/2020
+                                        
+moment.locale();         // id
+moment().format('LT');   // 23.56
+moment().format('LTS');  // 23.56.22
+moment().format('L');    // 02/04/2020
+moment().format('l');    // 2/4/2020
+moment().format('LL');   // 2 April 2020
+moment().format('ll');   // 2 Apr 2020
+moment().format('LLL');  // 2 April 2020 pukul 23.56
+moment().format('lll');  // 2 Apr 2020 pukul 23.56
+moment().format('LLLL'); // Kamis, 2 April 2020 pukul 23.56
+moment().format('llll'); // Kam, 2 Apr 2020 pukul 23.56
+             
+             
+
+
+
+
+
+
+/**
+ * JavaScript juga mengenal Void operator
+ * 
+ * hanya saja di Javascript fungsinya hanya untuk meng-evaluasi suatu expression
+ * dan selalu me-return undefined
+ */
+
+void 0
+void (0)
+void "hello"
+void (new Date())
+void function test() { console.log('test') }
+
+// semua diatas hasilnya undefined
+
+/**
+ * Apa sih kalao gitu gunanya? ...dahulu kala sebelum JavaScript versi ES5,
+ * 
+ * undefined bisa di overrride sesuka hati 
+ */
+
+// javascript jaman old kode berikut ini valid
+var undefined = 'new val';
+console.log(undefined); // new val
+
+// ini bisa masalah...karena kita banyak melakukan validasi dengan undefined dimana-mana
+if (a == undefined) {}
+if (x != undefined) {}
+
+// bayangkan kalau undefined nya di override...jadi ngaco kan....
+
+// sekarang di Era ES5 kesini...undefined sdh gak bisa di override lagi...
+// jadi lebih aman, namun untuk kompatability...karena masih banyak orang pake browser jadul,
+// maka kita mesti cari akan gimana caranya validasi dengan undefined dengan aman
+
+// maka di pakailah operator void, karena ia selalu menghasilkan undefined
+
+// syntax: void <anything>
+
+void 0 == undefined; // true
+void 23 == undefined; // true
+void 'test' == undefined; // true
+void(0) == undefined; // true
+void function test() { console.log('test') }; // undefined
+
+// nah dengan behaviour ini dan karena alasan kompatability, banyak orang masih validasi 
+// undefined dengan void
+
+if (typeof a == void 0) {} // artinya cek apakah type dari a itu undefined
+
+// contoh Library Unit Test Jasmine, pakai ini
+// lihat file ini dibaris paling bawah
+// https://github.com/codetrash/jasmine/blob/master/src/core/Spec.js
+
+/**
+ * Void juga memaksa sebuah function di evalusasi sebagai function expression
+ * alih-alih sebagai function declaration
+ */
+
+function test() {
+  console.log('hai');
+}();
+
+// function diatas Error, karena function itu jenisnya declaration
+// kita mesti ubah menjadi immediately-invoked-function 
+
+(function test() {
+  console.log('hai'); // hai
+})();
+
+// atau kita ubah ke function expression agar tdk Error, seperti ini
+
+var test = function () {
+  console.log('hai'); // hai
+}();
+
+// cara lain adalah dengan menambahkan void operator
+void function test() {
+  console.log('hai'); // hai
+}();
+
+// hanya saja perlu di-ingat...Void selalu menghasilkan undefined, maka function diatas
+// tidka bisa dipanggil
+// seperti ini
+test(); // Error not defined
+
+void function test() {
+	console.log(232)
+}
+
+test(); // Error: test is not defined
+
+// kita juga sering lihat penggunaan void operator ini untuk url
+<a href="javascript:void(0);">link</a>
+
+// ini agar link itu tidak menuju kemana-mana
