@@ -31,7 +31,6 @@ animateHeart()
 
 
 const t = document.querySelector('#disini');
-AOS.init()
 t.addEventListener('click', function() {
   Swal.fire('test')
 })
@@ -45,7 +44,7 @@ t.addEventListener('click', function() {
 
 
 
-
+AOS.init()
 
 
 
