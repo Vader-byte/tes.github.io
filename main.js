@@ -1,3 +1,5 @@
+AOS.init()
+
 const container = document.querySelector('.container');
   for (let i = 1; i <= 55; i++) {
     const heart = document.createElement('div');
@@ -29,25 +31,11 @@ animateHeart()
 
 
 const t = document.querySelector('#disini');
+AOS.init()
 t.addEventListener('click', function() {
-  Swal.fire({
-    title: "test",
-    text: 'test text',
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonText: 'klik',
-  }).then((res) => {
-      if(res.isConfirmed) {
-        Swal.fire(
-          'confirm',
-          'success'
-        )
-      }
-    })
+  Swal.fire('test')
 })
 
-
-AOS.init()
 
 
 
